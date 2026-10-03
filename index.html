@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THE FERN | Hotel Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-icon">✦</span>
+      <div>
+        <h1>THE FERN</h1>
+        <p>HOTEL MANAGEMENT</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="live-dot"></span>
+      Reservation Dashboard
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="welcome">
+      <div>
+        <p class="eyebrow">MANAGEMENT CONSOLE</p>
+        <h2>Manage your <span>reservations.</span></h2>
+        <p class="subtitle">Keep every guest experience organized, from check-in to check-out.</p>
+      </div>
+      <button class="primary-btn" id="addBookingBtn">
+        <span>＋</span> New Booking
+      </button>
+    </section>
+
+    <section class="stats">
+      <article class="stat-card">
+        <p>Total Bookings</p>
+        <h3 id="totalBookings">0</h3>
+        <span>All reservations</span>
+      </article>
+      <article class="stat-card">
+        <p>Confirmed</p>
+        <h3 id="confirmedBookings">0</h3>
+        <span>Confirmed reservations</span>
+      </article>
+      <article class="stat-card">
+        <p>Checked In</p>
+        <h3 id="checkedInBookings">0</h3>
+        <span>Currently staying</span>
+      </article>
+      <article class="stat-card">
+        <p>Booking Revenue</p>
+        <h3 id="totalRevenue">₹0</h3>
+        <span>Value of all bookings</span>
+      </article>
+    </section>
+
+    <section class="panel" id="bookingPanel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow" id="formEyebrow">RESERVATION DETAILS</p>
+          <h3 id="formTitle">Create a booking</h3>
+        </div>
+        <button class="icon-btn" id="closeFormBtn" aria-label="Close form">✕</button>
+      </div>
+
+<!-- ROOM AVAILABILITY SECTION -->
+<section class="panel">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">ROOM MANAGEMENT</p>
+      <h3>Available Rooms</h3>
+    </div>
+  </div>
+
+  <div class="availability-search">
+    <div class="field">
+      <label for="availabilityCheckIn">Check-in Date</label>
+      <input type="date" id="availabilityCheckIn">
+    </div>
+
+    <div class="field">
+      <label for="availabilityCheckOut">Check-out Date</label>
+      <input type="date" id="availabilityCheckOut">
+    </div>
+
+    <button class="primary-btn" id="checkRoomsBtn">
+      Check Availability
+    </button>
+  </div>
+
+  <div class="room-grid" id="availableRooms">
+    <p class="table-note">
+      Select your dates to check room availability.
+    </p>
+  </div>
+</section>
+
+      <form id="bookingForm">
+        <input type="hidden" id="bookingId">
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="guestName">Guest full name *</label>
+            <input id="guestName" type="text" placeholder="e.g. Priya Sharma"
+                   maxlength="80" required>
+          </div>
+
+          <div class="field">
+            <label for="email">Email address *</label>
+            <input id="email" type="email" placeholder="guest@example.com" required>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone number *</label>
+            <input id="phone" type="tel" placeholder="10-digit mobile number"
+                   pattern="[0-9]{10}" maxlength="10" required>
+          </div>
+
+          <div class="field">
+            <label for="roomType">Room type *</label>
+            <select id="roomType" required>
+              <option value="">Select a room</option>
+              <option value="Standard">Standard Room</option>
+              <option value="Deluxe">Deluxe Room</option>
+              <option value="Suite">Luxury Suite</option>
+              <option value="Family">Family Room</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="checkIn">Check-in date *</label>
+            <input id="checkIn" type="date" required>
+          </div>
+
+          <div class="field">
+            <label for="checkOut">Check-out date *</label>
+            <input id="checkOut" type="date" required>
+          </div>
+
+          <div class="field">
+            <label for="guests">Number of guests *</label>
+            <input id="guests" type="number" min="1" max="20"
+                   value="1" required>
+          </div>
+
+          <div class="field">
+            <label for="price">Price per night (₹) *</label>
+            <input id="price" type="number" min="1" step="0.01"
+                   placeholder="2500" required>
+          </div>
+
+          <div class="field">
+            <label for="status">Booking status *</label>
+            <select id="status" required>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Checked In">Checked In</option>
+              <option value="Checked Out">Checked Out</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="payment">Payment status *</label>
+            <select id="payment" required>
+              <option value="Pending">Pending</option>
+              <option value="Paid">Paid</option>
+              <option value="Partially Paid">Partially Paid</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="price-preview">
+          <div>
+            <p>Estimated booking total</p>
+            <span id="priceBreakdown">Select dates and price to calculate</span>
+          </div>
+          <strong id="estimatedTotal">₹0</strong>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="secondary-btn" id="cancelFormBtn">
+            Cancel
+          </button>
+          <button type="submit" class="primary-btn" id="saveBtn">
+            Save Booking
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel reservations">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">GUEST DIRECTORY</p>
+          <h3>All reservations <span class="count" id="bookingCount">0</span></h3>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <span>⌕</span>
+          <input type="search" id="searchInput"
+                 placeholder="Search guest, email or booking ID...">
+        </div>
+
+        <select id="statusFilter" aria-label="Filter by booking status">
+          <option value="All">All statuses</option>
+          <option value="Confirmed">Confirmed</option>
+          <option value="Checked In">Checked In</option>
+          <option value="Checked Out">Checked Out</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>BOOKING / GUEST</th>
+              <th>ROOM</th>
+              <th>STAY</th>
+              <th>TOTAL</th>
+              <th>STATUS</th>
+              <th>PAYMENT</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody id="bookingTable"></tbody>
+        </table>
+      </div>
+      <p class="table-note" id="tableNote">Your reservations will appear here.</p>
+    </section>
+
+    <footer>
+      <span>✦ THE FERN</span>
+      <span>Hotel Operations Dashboard · Demo Project</span>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
